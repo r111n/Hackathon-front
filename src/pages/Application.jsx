@@ -3,11 +3,12 @@ import Navbar from "../components/application/Navbar";
 
 const Application = () => {
   return (
-    <>
-    <Navbar />
-    <Outlet />
-    </>
-  )
+    <div className="w-full h-screen flex flex-col place-items-center bg-gray-300">
+      <Navbar />
+      
+      <Outlet />
+    </div>
+  );
 };
 
 export default Application;
