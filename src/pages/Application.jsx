@@ -6,7 +6,7 @@ const Application = () => {
     <>
     <Navbar />
     <Outlet />
-    </>
+    </> 
   )
 };
 
