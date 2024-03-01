@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Application from "./pages/Application";
+import Application from "./pages/company/Application";
 // import { useUserStore } from "./store/UserStore";
-import Jobs from "./pages/Jobs";
+import Applicants from "./pages/company/Applicants";
 import Login from "./pages/auth/Login";
-import Home from "./pages/Home";
+import Home from "./pages/company/Home";
+import Jobs from "./pages/company/Jobs";
+import Interviews from "./pages/company/Interviews";
 
 function App() {
   // const { user } = useUserStore();
@@ -14,7 +16,9 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/application" element={<Application />}>
             <Route path="" element={<Home />} />
+            <Route path="applicants" element={<Applicants />} />
             <Route path="jobs" element={<Jobs />} />
+            <Route path="interviews" element={<Interviews />} />
           </Route>
         </Routes>
       </Router>
