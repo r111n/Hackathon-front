@@ -23,7 +23,7 @@ const Home = () => {
             </Avatar>
           </div>
           <div className="flex justify-center place-items-center gap-1">
-            <h3 className="text-lg font-bold">Mike Wazawski</h3>
+            <h3 className="text-lg font-bold">Sharlen Magalanes</h3>
             <div className="h-3 w-3 bg-green-500 rounded-full"></div>
           </div>
         </div>
@@ -73,8 +73,21 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="w-full h-full bg-white rounded-2xl flex p-6">
+        <div className="w-full h-full bg-white rounded-2xl flex flex-col p-6 gap-3">
           <h3 className="text-md font-bold">Applications</h3>
+          <div className="w-full h-full flex flex-col gap-1 bg-red">
+            <div className="w-full flex py-6 px-6 h-auto bg-slate-100 rounded-2xl gap-4 place-items-center ">
+              <Avatar className="w-16 h-16">
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col">
+                <h3 className="text-lg font-bold">Sotware Developer</h3>
+                <p className="text-md font-regular">Applicant: Son Anthony</p>
+                <p className="text-md font-regular">Mon, 21/10/2024</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

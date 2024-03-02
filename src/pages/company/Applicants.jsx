@@ -1,29 +1,44 @@
-/* eslint-disable react/jsx-key */
 import { useState } from "react";
-import { useGetUsers } from "@/hooks/useUsers";
 import { FiSearch } from "react-icons/fi";
 import { IoLocationOutline } from "react-icons/io5";
 import users from "@/users.json";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+const PAGE_SIZE = 12; // Number of users per page
+
 const Applicants = () => {
   const [search, setSearch] = useState("");
   const [location, setLocation] = useState("");
+  const [currentPage, setCurrentPage] = useState(1); // Current page number
   const popularSearches = [
-    "Software Engineer",
+    "Graphic Designer",
     "Frontend Developer",
     "Backend Developer",
-    "Full Stack Developer",
-    "React Developer",
+    "UI/UX Designer",
+    "Full-Stack Developer",
     "Vue Developer",
   ];
 
-  const { data, isLoading } = useGetUsers();
-  console.log(users);
+  // Filter users based on search query and location
+  const filteredUsers = users.filter((user) =>
+    user.main_job.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // Calculate total number of pages based on filtered results
+  const totalPages = Math.ceil(filteredUsers.length / PAGE_SIZE);
+
+  // Calculate index range for current page
+  const startIndex = (currentPage - 1) * PAGE_SIZE;
+  const endIndex = Math.min(startIndex + PAGE_SIZE, filteredUsers.length);
+
+  // Function to handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
-    <section className="w-full h-full flex justify-start place-items-start py-4 gap-6">
-      <div className="flex flex-col w-full h-full gap-6">
+    <section className="w-full h-full flex justify-center place-items-start py-4 gap-6">
+      <div className="flex flex-col w-[70%] h-full gap-6">
         <div className="w-full h-[50%] rounded-2xl px-10 flex flex-col justify-center gap-4 bg-blue-700">
           <h1 className="text-3xl font-regular text-white">
             Find talented people for your company
@@ -54,9 +69,7 @@ const Applicants = () => {
             </button>
           </div>
           <div className="w-full flex flex-col gap-2">
-            <h3 className="text-lg text-white font-regular">
-              Popular Searches
-            </h3>
+            <h3 className="text-lg text-white font-regular">Available Jobs</h3>
             <div className="w-full flex gap-2 flex-wrap">
               {popularSearches.map((item) => (
                 <h1
@@ -70,30 +83,41 @@ const Applicants = () => {
             </div>
           </div>
         </div>
-        <div className="w-full h-full bg-white rounded-2xl flex flex-wrap p-6 gap-4 justify-between overflow-scroll">
+        <div className="w-full h-full bg-white rounded-2xl flex flex-col flex-wrap p-6 gap-4 justify-between ">
           <div className="grid grid-cols-4 gap-2 w-full">
-            {isLoading ? (
-              <p>Loading...</p>
-            ) : (
-              users?.map((item) => (
-                <div
-                  key={item.id}
-                  className="w-full h-[200px] bg-slate-100 rounded-lg flex flex-col place-items-center p-3"
+            {filteredUsers.slice(startIndex, endIndex).map((item) => (
+              <div
+                key={item.id}
+                className="w-full h-[200px] bg-slate-100 rounded-lg flex flex-col place-items-center p-3"
+              >
+                <Avatar className="w-24 h-24">
+                  <AvatarImage src={item.img} />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <h3>{item.first_name + " " + item.last_name}</h3>
+                <h3 className="text-sm font-bold">{item.main_job}</h3>
+                <div className="w-full flex justify-between"></div>
+              </div>
+            ))}
+          </div>
+          <div className="w-full">
+            <div className="flex justify-center mt-4">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => handlePageChange(index + 1)}
+                  className={`px-3 py-1 mx-1 rounded ${
+                    currentPage === index + 1
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200"
+                  }`}
                 >
-                  <Avatar className="w-24 h-24">
-                    <AvatarImage src={item.img} />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                  <h3>{item.first_name + " " + item.last_name}</h3>
-                  <h3 className="text-sm font-bold">{item.main_job}</h3>
-                </div>
-              ))
-            )}
+                  {index + 1}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="w-[30%] h-full bg-white rounded-2xl p-6">
-        <h3 className="text-md font-bold">Filter</h3>
       </div>
     </section>
   );
