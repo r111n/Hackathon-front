@@ -1,9 +1,16 @@
-/* eslint-disable react/jsx-key */
+
+import { useState } from "react";
 import { useGetUsers } from "@/hooks/useUsers";
 import { FiSearch } from "react-icons/fi";
 import { IoLocationOutline } from "react-icons/io5";
+import users from "@/users.json";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useUserStore } from "../../store/UserStore";
 
 const Applicants = () => {
+  const [search, setSearch] = useState("");
+  const [location, setLocation] = useState("");
+  const { isLoading } = useUserStore()
   const popularSearches = [
     "Software Engineer",
     "Frontend Developer",
@@ -12,8 +19,6 @@ const Applicants = () => {
     "React Developer",
     "Vue Developer",
   ];
-
-  const { data, isLoading } = useGetUsers();
 
   return (
     <section className="w-full h-full flex justify-start place-items-start py-4 gap-6">
@@ -29,6 +34,8 @@ const Applicants = () => {
                 type="text"
                 className=" w-full p-3 rounded-xl outline-none bg-transparent text-sm"
                 placeholder="Job Title, Talent or keywords"
+                onChange={(e) => setSearch(e.target.value)}
+                value={search}
               />
             </div>
             <div className="w-[30%] flex place-items-center bg-white rounded-xl px-3">
@@ -37,6 +44,8 @@ const Applicants = () => {
                 type="text"
                 className="p-3 rounded-2xl outline-none bg-transparent text-sm"
                 placeholder="Zip code"
+                onChange={(e) => setLocation(e.target.value)}
+                value={location}
               />
             </div>
             <button className="h-full px-6 bg-blue-600 rounded-xl text-white font-bold">
@@ -50,6 +59,7 @@ const Applicants = () => {
             <div className="w-full flex gap-2 flex-wrap">
               {popularSearches.map((item) => (
                 <h1
+                  onClick={() => setSearch(item)}
                   key={item}
                   className="py-2 px-3 border border-slate-200 rounded-full text-xs font-regular text-white font-semibold cursor-pointer hover:bg-white hover:text-black transition-all duration-300"
                 >
@@ -60,6 +70,30 @@ const Applicants = () => {
           </div>
         </div>
         <div className="w-full h-full bg-white rounded-2xl flex"></div>
+        <div className="w-full h-[full] bg-white rounded-2xl flex flex-wrap p-6 gap-4 justify-between">
+          <div className="grid grid-cols-4 gap-2 w-full">
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              users?.map((item) => (
+                <div
+                  key={item.id}
+                  className="w-full h-[200px] bg-slate-100 rounded-lg flex flex-col place-items-center p-3"
+                >
+                  <Avatar className="w-24 h-24">
+                    <AvatarImage src={item.img} />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                  <h3>{item.first_name + " " + item.last_name}</h3>
+                  <h3 className="text-sm font-bold">{item.main_job}</h3>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="w-[30%] h-full bg-white rounded-2xl p-6">
+        <h3 className="text-md font-bold">Filter</h3>
       </div>
     </section>
   );
