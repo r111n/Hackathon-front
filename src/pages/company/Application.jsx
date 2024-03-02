@@ -3,7 +3,7 @@ import Navbar from "../../components/application/Navbar";
 
 const Application = () => {
   return (
-    <div className="w-full h-screen flex flex-col place-items-center bg-gray-300">
+    <div className="w-full h-screen flex flex-col place-items-center bg-slate-200">
       <Navbar />
 
       <Outlet />
