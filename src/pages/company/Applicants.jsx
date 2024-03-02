@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */
+import { useGetUsers } from "@/hooks/useUsers";
 import { FiSearch } from "react-icons/fi";
 import { IoLocationOutline } from "react-icons/io5";
 
@@ -10,6 +12,9 @@ const Applicants = () => {
     "React Developer",
     "Vue Developer",
   ];
+
+  const { data, isLoading } = useGetUsers();
+  console.log(data);
 
   return (
     <section className="w-full h-full flex justify-start place-items-start py-4 gap-6">
@@ -55,7 +60,20 @@ const Applicants = () => {
             </div>
           </div>
         </div>
-        <div className="w-full h-full bg-white rounded-2xl flex flex-wrap"></div>
+        <div className="w-full h-full bg-white rounded-2xl flex flex-wrap p-6 gap-4">
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            data?.map((item) => (
+              <div
+                key={item.user_id}
+                className="w-[20%] h-[200px] bg-slate-300 rounded-lg flex flex-col"
+              >
+                {item.user_id}
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </section>
   );
