@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios"
 
 const useLogin = async(email, password, setUser, setIsLoading ) => {
