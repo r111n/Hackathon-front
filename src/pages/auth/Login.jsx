@@ -45,7 +45,7 @@ const Login = () => {
                   </div>
                  <div className="p-2">
                     <label>Password</label><br />
-                    <input type="text" className="px-6 py-4 w-[100%] bg-blue-100" onChange={handlePassword}/>
+                    <input type="password" className="px-6 py-4 w-[100%] bg-blue-100" onChange={handlePassword}/>
                  </div>
                  <div className="px-2">
                  <button className="px-8 py-3 rounded-md bg-blue-600 font-bold text-slate-50 text-lg" onClick={handleLogin}>Log in</button>
@@ -54,7 +54,7 @@ const Login = () => {
             </div>
         </div>
         <div className="w-full rounded-tl-[4rem] rounded-bl-[4rem] bg-blue-600">
-          asdsa
+          
         </div>
     </div>
     </>

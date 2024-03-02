@@ -73,7 +73,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="w-full h-full bg-white rounded-2xl flex"></div>
+        <div className="w-full h-full bg-white rounded-2xl flex p-6">
+          <h3 className="text-md font-bold">Applications</h3>
+        </div>
       </div>
     </section>
   );
