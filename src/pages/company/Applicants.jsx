@@ -70,7 +70,7 @@ const Applicants = () => {
             </div>
           </div>
         </div>
-        <div className="w-full h-[full] bg-white rounded-2xl flex flex-wrap p-6 gap-4 justify-between">
+        <div className="w-full h-full bg-white rounded-2xl flex flex-wrap p-6 gap-4 justify-between overflow-scroll">
           <div className="grid grid-cols-4 gap-2 w-full">
             {isLoading ? (
               <p>Loading...</p>
