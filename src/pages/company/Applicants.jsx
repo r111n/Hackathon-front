@@ -72,7 +72,9 @@ const Applicants = () => {
             </div>
           </div>
         </div>
-        <div className="w-full h-full bg-white rounded-2xl flex"></div>
+        <div className="w-full h-full bg-white rounded-2xl flex">
+          
+        </div>
       </div>
     </section>
   );
