@@ -1,16 +1,14 @@
 import axios from "axios"
-
-const useLogin = async(email, password, setUser, setIsLoading ) => {
+export const useLogin = async(data , setUser, setIsLoading, navigate) => {
     setIsLoading(true)
-    const data = {
-        email: email,
-        password: password
-    }
     try{
-        const response = await axios.post(`http://192.168.0.69:1234/login`, data)
+        const response = await axios.post(`http://192.168.8.126:1234/login`, data)
         if(response.status >= 200 || response.status < 300){
             setUser(response.data)
             setIsLoading(false)
+            console.log(response.data)
+            console.log("hello")
+            navigate("/application")
         }
     }catch(error){
         console.error("Login errro:", error.message)

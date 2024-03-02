@@ -27,8 +27,8 @@ const Home = () => {
             <div className="h-3 w-3 bg-green-500 rounded-full"></div>
           </div>
         </div>
-        <div className="w-full h-full bg-white rounded-2xl flex p-3">
-          <h3>Upcoming Interviews</h3>
+        <div className="w-full h-full bg-white rounded-2xl flex p-6">
+          <h3 className="text-md font-bold">Upcoming Interviews</h3>
         </div>
       </div>
       <div className="flex flex-col w-full h-full gap-6">

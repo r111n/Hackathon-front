@@ -1,4 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+/* eslint-disable react/jsx-key */
+import { useGetUsers } from "@/hooks/useUsers";
 import { FiSearch } from "react-icons/fi";
 import { IoLocationOutline } from "react-icons/io5";
 
@@ -11,25 +12,11 @@ const Applicants = () => {
     "React Developer",
     "Vue Developer",
   ];
+
+  const { data, isLoading } = useGetUsers();
+
   return (
     <section className="w-full h-full flex justify-start place-items-start py-4 gap-6">
-      <div className="flex flex-col w-[35%] h-full gap-6">
-        <div className="w-full h-[50%] flex flex-col justify-start place-items-center p-3 gap-10 bg-white rounded-2xl">
-          <div className="w-full h-[45%] bg-purple-400 rounded-2xl relative">
-            <Avatar className="w-24 h-24 absolute bottom-[-30%] left-[35%] border-white border-4">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          </div>
-          <div className="flex justify-center place-items-center gap-1">
-            <h3 className="text-lg font-bold">Mike Wazawski</h3>
-            <div className="h-3 w-3 bg-green-500 rounded-full"></div>
-          </div>
-        </div>
-        <div className="w-full h-full bg-white rounded-2xl flex p-3">
-          <h3>Upcoming Interviews</h3>
-        </div>
-      </div>
       <div className="flex flex-col w-full h-full gap-6">
         <div className="w-full h-[50%] rounded-2xl px-10 flex flex-col justify-center gap-4 bg-blue-700">
           <h1 className="text-3xl font-regular text-white">
@@ -61,20 +48,18 @@ const Applicants = () => {
               Popular Searches
             </h3>
             <div className="w-full flex gap-2 flex-wrap">
-              {popularSearches.map((search) => (
+              {popularSearches.map((item) => (
                 <h1
-                  key={search}
+                  key={item}
                   className="py-2 px-3 border border-slate-200 rounded-full text-xs font-regular text-white font-semibold cursor-pointer hover:bg-white hover:text-black transition-all duration-300"
                 >
-                  {search}
+                  {item}
                 </h1>
               ))}
             </div>
           </div>
         </div>
-        <div className="w-full h-full bg-white rounded-2xl flex">
-          
-        </div>
+        <div className="w-full h-full bg-white rounded-2xl flex"></div>
       </div>
     </section>
   );
