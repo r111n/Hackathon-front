@@ -5,12 +5,32 @@ import { FiSearch } from "react-icons/fi";
 import { IoLocationOutline } from "react-icons/io5";
 import users from "@/users.json";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+<<<<<<< HEAD
 import { useUserStore } from "../../store/UserStore";
+=======
+import { useUserStore } from "@/store/UserStore";
+
+const calculateMatchingScore = (skillsNeeded, jobSeekerSkills) => {
+  let score = 0;
+  for (const skill of skillsNeeded) {
+    if (jobSeekerSkills.includes(skill)) {
+      score++;
+    }
+  }
+  return score;
+}
+
+
+>>>>>>> eb6875559917e7a37b7015bcb1919a88890bf490
 
 const Applicants = () => {
   const [search, setSearch] = useState("");
   const [location, setLocation] = useState("");
+<<<<<<< HEAD
   const { isLoading } = useUserStore()
+=======
+  const { companySkills, isLoading, setIsLoading } = useUserStore()
+>>>>>>> eb6875559917e7a37b7015bcb1919a88890bf490
   const popularSearches = [
     "Software Engineer",
     "Frontend Developer",
@@ -20,6 +40,18 @@ const Applicants = () => {
     "Vue Developer",
   ];
 
+<<<<<<< HEAD
+=======
+
+  const sortedCandidates = users?.map(jobSeeker => {
+    const score = calculateMatchingScore(companySkills, jobSeeker.skills);
+    return { first_name: jobSeeker.first_name, last_name: jobSeeker.last_name, score: score, img: jobSeeker.img };
+  }).sort((a, b) => b.score - a.score)
+
+  console.log(sortedCandidates)
+  console.log(companySkills)
+
+>>>>>>> eb6875559917e7a37b7015bcb1919a88890bf490
   return (
     <section className="w-full h-full flex justify-start place-items-start py-4 gap-6">
       <div className="flex flex-col w-full h-full gap-6">
@@ -74,7 +106,7 @@ const Applicants = () => {
             {isLoading ? (
               <p>Loading...</p>
             ) : (
-              users?.map((item) => (
+              sortedCandidates.map((item) => (
                 <div
                   key={item.id}
                   className="w-full h-[200px] bg-slate-100 rounded-lg flex flex-col place-items-center p-3"
@@ -85,6 +117,7 @@ const Applicants = () => {
                   </Avatar>
                   <h3>{item.first_name + " " + item.last_name}</h3>
                   <h3 className="text-sm font-bold">{item.main_job}</h3>
+                  <p>{item.score}</p>
                 </div>
               ))
             )}
