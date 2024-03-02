@@ -7,6 +7,7 @@ import Home from "./pages/company/Home";
 import Jobs from "./pages/company/Jobs";
 import Interviews from "./pages/company/Interviews";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import Landing from "./pages/Landing";
 
 const queryClient = new QueryClient()
 
@@ -18,7 +19,8 @@ function App() {
       <QueryClientProvider client={queryClient}>
           <Router>
             <Routes>
-              <Route path="/" element={<Login />} />
+              <Route path="/" element={<Landing />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/application" element={<Application />}>
                 <Route path="" element={<Home />} />
                 <Route path="applicants" element={<Applicants />} />
